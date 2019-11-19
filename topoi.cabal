@@ -9,6 +9,9 @@ build-type:          Simple
 
 tested-with:         GHC == 8.8.1
 
+-- When you really feel like being a tryhard, comment the pragmas.
+-- https://twitter.com/chris__martin/status/1196238372710187008
+
 common haskell
     default-language:  Haskell2010
 
@@ -18,8 +21,23 @@ common ghc-warnings
 
 common dependencies
     build-depends:     base
-    -- When you really feel like being a tryhard, comment the pragmas.
-    -- https://twitter.com/chris__martin/status/1196238372710187008
+                     -- parser combinator
+                     , megaparsec
+
+    default-extensions:
+        -- Allow to use Applicative inside the do-block
+        ApplicativeDo
+
+        -- Allow the use of complex constraints in class declaration contexts.
+        FlexibleContexts
+        
+        -- Allow definition of type class instances with arbitrary nested types
+        -- in the instance head.
+        FlexibleInstances
+
+        -- Enabling the string literals which belongs to the `IsString`
+        -- typeclass.
+        OverloadedStrings
 
 library
     import:            haskell, ghc-warnings, dependencies
