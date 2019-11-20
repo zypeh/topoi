@@ -1,12 +1,34 @@
 module Topoi (main) where
 
-import qualified Text.Megaparsec as MP
-import qualified Text.Megaparsec.Char as MP
-import qualified Text.Megaparsec.Char.Lexer as MPL
+import           Control.Monad.Except       (Except)
+import           Control.Monad.State        (StateT)
+import           Data.ByteString.Lazy       (ByteString)
+import           Data.Loc                   (Loc, Pos)
+import           Data.Text                  (Text)
+import           Language.Lexer.Applicative
 
 main :: IO ()
 main = putStrLn "hello from topoi"
 
--- Should I use String or Text here ?
--- type TestParser = MP.Parsec ParseError String
--- instance CanParse (MP.ParsecT ParseError String Identity)
+type Parser = StateT ParserState (Except ParseError)
+
+data Token
+    = TokenAssign
+    | TokenType
+    | TokenTermName Text
+    | TokenTypeName Text
+    | TokenComment Text
+    | TokenWhitespace
+    | TokenEOF
+    deriving (Eq, Show)
+
+data ParseError
+    = Lexical ByteString Pos
+    | Syntatical ByteString Loc Token
+    deriving (Show)
+
+data ParserState = ParserState
+    { currentLoc :: Loc
+    -- , tokenStream :: TokenStream (L Token)
+    , rawSource  :: ByteString -- for error reporting
+    } deriving (Show)

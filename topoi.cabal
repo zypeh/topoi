@@ -21,8 +21,21 @@ common ghc-warnings
 
 common dependencies
     build-depends:     base
+                     -- compact text storage
+                     , bytestring
+                     -- tokenizer
+                     , lexer-applicative
                      -- parser combinator
                      , megaparsec
+                     -- huge monad transformer
+                     , mtl
+                     -- regular expression combiantor to tokenizes the source
+                     -- code
+                     , regex-applicative
+                     -- wow, an existing library to manage sorce code metadata
+                     , srcloc
+                     -- unicode strings instead of the prelude's list of char
+                     , text
 
     default-extensions:
         -- Allow to use Applicative inside the do-block
