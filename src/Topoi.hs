@@ -3,7 +3,7 @@ module Topoi (main) where
 import           Control.Monad.Except       (Except)
 import           Control.Monad.State        (StateT)
 import           Data.ByteString.Lazy       (ByteString)
-import           Data.Loc                   (Loc, Pos)
+import qualified Data.Loc                   as Loc
 import           Data.Text                  (Text)
 import           Language.Lexer.Applicative
 
