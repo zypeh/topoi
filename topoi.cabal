@@ -37,6 +37,7 @@ common dependencies
                      -- unicode strings instead of the prelude's list of char
                      , text
 
+    -- Don't forget to update .stylish-haskell.yaml
     default-extensions:
         -- Allow to use Applicative inside the do-block
         ApplicativeDo
@@ -51,6 +52,9 @@ common dependencies
         -- Enabling the string literals which belongs to the `IsString`
         -- typeclass.
         OverloadedStrings
+
+        -- Generalisation of associated data types
+        TypeFamilies
 
 library
     import:            haskell, ghc-warnings, dependencies
